@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:animate_do/animate_do.dart';
-import 'package:animated_icon/animated_icon.dart';
 import 'package:custom_map_markers/custom_map_markers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:lottie/lottie.dart' hide Marker;
 import 'package:map_challenge/resources/resources.dart';
 import '../../../app/app_constant.dart';
 import '../../../utils/utils.dart';
@@ -108,7 +106,7 @@ class ExploreMapCubit extends Cubit<ExploreMapState> {
   }
 
   addMarkerForListing(
-      {double? bounceHeight, LatLng? currentLatLng, bool? isGoingUp}) {
+      {LatLng? currentLatLng,  }) {
     markers.clear();
 
     if (currentLatLng != null) {
@@ -128,9 +126,7 @@ class ExploreMapCubit extends Cubit<ExploreMapState> {
     }
     for (int i = 0; i < markerItemList.length; i++) {
       MarkerItemData itemData = markerItemList[i];
-      double lat = isGoingUp == true
-          ? (itemData.latLng.latitude + (bounceHeight ?? 0))
-          : (itemData.latLng.latitude - (bounceHeight ?? 0));
+      double lat = itemData.latLng.latitude;
       double lng = itemData.latLng.longitude;
       markers.add(
         MarkerData(
